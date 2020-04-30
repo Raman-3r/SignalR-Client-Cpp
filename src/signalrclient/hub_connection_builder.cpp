@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "signalrclient/hub_connection_builder.h"
 #include <stdexcept>
+#include "signalr_default_scheduler.h"
 
 namespace signalr
 {
@@ -85,6 +86,6 @@ namespace signalr
         }
 #endif
 
-        return hub_connection(m_url, m_log_level, m_logger, m_http_client, m_websocket_factory);
+        return hub_connection(m_url, std::make_shared<signalr_default_scheduler>(), m_log_level, m_logger, m_http_client, m_websocket_factory);
     }
 }
