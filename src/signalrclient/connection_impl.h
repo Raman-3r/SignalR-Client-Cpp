@@ -28,9 +28,9 @@ namespace signalr
     class connection_impl : public std::enable_shared_from_this<connection_impl>
     {
     public:
-        static std::shared_ptr<connection_impl> create(const std::string& url, std::shared_ptr<scheduler> scheduler, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer);
+        static std::shared_ptr<connection_impl> create(const std::string& url, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer);
 
-        static std::shared_ptr<connection_impl> create(const std::string& url, std::shared_ptr<scheduler> scheduler, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
+        static std::shared_ptr<connection_impl> create(const std::string& url, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
             std::shared_ptr<http_client> http_client, std::function<std::shared_ptr<websocket_client>(const signalr_client_config&)> websocket_factory);
 
         connection_impl(const connection_impl&) = delete;
@@ -69,10 +69,10 @@ namespace signalr
         std::string m_connection_token;
         std::shared_ptr<http_client> m_http_client;
 
-        connection_impl(const std::string& url, std::shared_ptr<scheduler> scheduler, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
+        connection_impl(const std::string& url, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
             std::unique_ptr<http_client> http_client, std::unique_ptr<transport_factory> transport_factory);
 
-        connection_impl(const std::string& url, std::shared_ptr<scheduler> scheduler, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
+        connection_impl(const std::string& url, trace_level trace_level, const std::shared_ptr<log_writer>& log_writer,
             std::shared_ptr<http_client> http_client, std::function<std::shared_ptr<websocket_client>(const signalr_client_config&)> websocket_factory);
 
         void start_transport(const std::string& url, std::function<void(std::shared_ptr<transport>, std::exception_ptr)> callback);
